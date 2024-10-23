@@ -1,0 +1,16 @@
+Package: Inverts.GD
+Type: Package
+Title: MSE Objects and Code for B.C. Geoduck
+Version: 0.1.0
+Author: person("Tom", "Carruthers", email = "tom@bluematterscience.com", role = c("aut"))
+Description: Geoduck specific code and objects 
+License: GPL-3
+Encoding: UTF-8
+LazyData: yes
+Depends: 
+  R (>= 3.5.0),
+  openMSE
+Imports:
+    maps
+URL: https://msetool.openmse.com/
+RoxygenNote: 7.3.2
