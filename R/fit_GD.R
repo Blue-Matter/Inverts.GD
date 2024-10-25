@@ -25,6 +25,7 @@ cond.GD = function(RCMinput, sims = 12, max_F = 0.22, comp_like = "lognormal", r
                drop_nonconv=T, drop_highF=T, resample = resample, silent=silent);
   RCMfit@OM@Name = paste0("Geoduck Stat Area ",RCMinput[[1]])
   RCMfit@Misc$keepsims = Geoduck_OMfilter(RCMfit) # removes simulations with completely unrealistic recruitment deviations and age_selectivity
+  RCMfit@OM = SubCpars(RCMfit@OM, RCMfit@Misc$keepsims)
   RCMfit
 
 }
@@ -51,7 +52,7 @@ Geoduck_OMfilter = function(RCMfit,
   cv = Bcvs[nrow(Bmus),Bsuvpos]
   trunc = qlnorm(c(0.025,0.975),log(mu),cv)
   OM = RCMfit@OM
-  Best = t(sapply(RCMfit@Misc,function(x)x$B))
+  Best = t(sapply(RCMfit@report,function(x)x$B))
   Bfinal = Best[,OM@nyears]
   B1 = Best[,1]
 

@@ -14,3 +14,7 @@ Imports:
     maps
 URL: https://msetool.openmse.com/
 RoxygenNote: 7.3.2
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
