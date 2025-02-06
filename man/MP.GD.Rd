@@ -8,26 +8,26 @@ MP.GD(
   x,
   Data,
   reps = 1,
-  Min.size = 110,
+  Min.size = NaN,
   Max.size = NaN,
-  CEff.Mult = 1,
+  CEff.Mult = NaN,
   C_I.targ = 1,
   I.targ = 0.5,
   IS.targ = 0,
   IS.yrs = 6,
   IS.fac = 1,
-  TAC.calc = NaN,
+  TAC.calc = "Ratio",
   maxTAC = 5,
   minTAC = 0.1,
   TACdec = 0.2,
-  TACinc = 0.1,
+  TACinc = 0.2,
   I.enp = 0.25,
-  I_freq = c(0, 1, 0),
-  calib_yrs = 2,
+  I_freq = "auto",
+  rotation = "auto",
+  calib_yrs = 3,
   HCR_CP_B = c(0, 0),
   HCR_CP_TAC = c(0, 1),
   curI_2_target = 2,
-  Effort = 1,
   DR = 0,
   Fdisc = 0.5
 )
@@ -43,7 +43,7 @@ MP.GD(
 
 \item{Max.size}{Positive real number - maximum size limit (NaN is no limit)}
 
-\item{CEff.Mult}{Positive real number (imperfect fraction) the multiplier on current fising effort (fishing pressure)}
+\item{CEff.Mult}{Positive real number (imperfect fraction) the multiplier on current fishing effort (fishing pressure)}
 
 \item{C_I.targ}{Positive real number (imperfect fraction) TAC is calculated TAC(t+1) = I(t) x C(2022)/I(2022) x C_I.targ when TAC.calc = "Ratio"}
 
@@ -61,13 +61,15 @@ MP.GD(
 
 \item{minTAC}{Positive real number (imperfect fraction) - annual catches cannot be lower than current catches muliplied by this factor}
 
-\item{TACdec}{Positive real number (fraction) - downward TAC changes cannot exceed this fraction (e.g. 0.2 is maximum decline of 20% among management cycles)}
+\item{TACdec}{Positive real number (fraction) - downward TAC changes cannot exceed this fraction (e.g. 0.2 is maximum decline of 20 per cent among management cycles)}
 
-\item{TACinc}{Positive real number (fraction) - upward TAC changes cannot exceed this fraction (e.g. 0.1 is maximum increase of 10% among management cycles)}
+\item{TACinc}{Positive real number (fraction) - upward TAC changes cannot exceed this fraction (e.g. 0.1 is maximum increase of 10 per cent among management cycles)}
 
 \item{I.enp}{Positive real number (fraction) the parameter controlling effective number of parameters for the polynomial smoother on the indices. npar = ny * I.enp so higher values mean more smoother parameters and less smoothing}
 
-\item{I_freq}{Vector of positive integers - how frequently do you collect the indices (0 = do not collect, 1 = every year, 2 = every other year, 3 = once every three years, ...). Default is c(0, 1, 0) only the second index (ICMP) is observed and it is observed every year}
+\item{I_freq}{Vector of positive integers - how frequently do you collect the indices (0 = do not collect, 1 = every year, 2 = every other year, 3 = once every three years, ...). Default is "auto" - the absolute abundance index is located and updated every year}
+
+\item{rotation}{Vector proyears long of catch on/off (1 and 0, respectively). If a single value is specified (1, 2,..) the pattern alternates on once every year (1), every other year (2) etc. The default is "auto" where the MP tried to detect the most recent pattern}
 
 \item{calib_yrs}{Positive integer - how many of the recent years are used to calibrate Index to catch ratio for TAC based MPs}
 
@@ -77,17 +79,15 @@ MP.GD(
 
 \item{curI_2_target}{A positive real number that is the level of the current index (recent historical year) relative to the target biomass level (e.g. BMSY) 2 implies recent indices are at twice target levels (underexploited)}
 
-\item{Effort}{An effort limit phrased in units of effort in the most recent historical year (maxE = 1 is current effort). If you set this to NaN the model will only be constrained by other variables such as TAC.}
-
 \item{DR}{Fraction - the discard rate}
 
 \item{Fdisc}{The fraction of discarded individuals that die}
 }
 \description{
-A modifiable management procedure for Manila Clam that allows for adjustments to size limits, current effort and TAC control via indices
+A modifiable management procedure for Geoduck that allows for adjustments to size limits, current effort and TAC control via indices
 }
 \examples{
-MP.MC(Simulation_1) # apply to a generic simulated dataset from openMSE
+MP.GD(Simulation_1) # apply to a generic simulated dataset from openMSE
 }
 \author{
 T. Carruthers

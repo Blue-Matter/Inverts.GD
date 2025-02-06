@@ -1,7 +1,7 @@
 
 #' Management Procedure for Geoduck
 #'
-#' A modifiable management procedure for Manila Clam that allows for adjustments to size limits, current effort and TAC control via indices
+#' A modifiable management procedure for Geoduck that allows for adjustments to size limits, current effort and TAC control via indices
 #'
 #' @param x Positive integer - the simulation number
 #' @param Data Object of class 'Data'
@@ -42,7 +42,6 @@ MP.GD = function(x, Data, reps=1, Min.size = NaN, Max.size = NaN, CEff.Mult = Na
 
   dependencies = "Data@Cat, Data@AddInd"
   ny = length(Data@Year)
-  #if(ny==54){saveRDS(x,"C:/temp/x_GD.rds"); saveRDS(Data,"C:/temp/Data_GD.rds");stop()}
 
   nI = dim(Data@AddInd)[2]
   if(I_freq == "auto"){
@@ -132,8 +131,8 @@ MP.GD = function(x, Data, reps=1, Min.size = NaN, Max.size = NaN, CEff.Mult = Na
 
   # Minimum size limits
   if(!is.na(Min.size)){
-    Rec@LR5 = Min.size*0.80
-    Rec@LFR = Min.size *1.25
+    Rec@L5 = Min.size*0.95
+    Rec@LFS = Min.size *1.05
   }
   # Maximum size limits
   if(!is.na(Max.size)) Rec@HS = Max.size
@@ -142,6 +141,7 @@ MP.GD = function(x, Data, reps=1, Min.size = NaN, Max.size = NaN, CEff.Mult = Na
   py = ny-LHYrInd+1
   Rec@TAC = Rec@TAC * rotation[py]
   Rec@Effort = Rec@Effort*rotation[py]
+
   Rec
 
 }
