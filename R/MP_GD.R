@@ -42,7 +42,7 @@ MP.GD = function(x, Data, reps=1, Min.size = NaN, Max.size = NaN, CEff.Mult = Na
 
   dependencies = "Data@Cat, Data@AddInd"
   ny = length(Data@Year)
-  if(ny==54){saveRDS(x,"C:/temp/x_GD.rds"); saveRDS(Data,"C:/temp/Data_GD.rds");stop()}
+  #if(ny==54){saveRDS(x,"C:/temp/x_GD.rds"); saveRDS(Data,"C:/temp/Data_GD.rds");stop()}
 
   nI = dim(Data@AddInd)[2]
   if(I_freq == "auto"){
