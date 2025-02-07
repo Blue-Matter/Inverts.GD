@@ -10,7 +10,7 @@ cond.GD(
   max_F = 0.22,
   comp_like = "lognormal",
   resample = T,
-  parallel = T,
+  parallel = F,
   silent = T
 )
 }

@@ -1,7 +1,7 @@
 Package: Inverts.GD
 Type: Package
 Title: MSE Objects and Code for B.C. Geoduck
-Version: 0.3.0
+Version: 0.4.0
 Author: person("Tom", "Carruthers", email = "tom@bluematterscience.com", role = c("aut"))
 Description: Geoduck specific code and objects 
 License: GPL-3
