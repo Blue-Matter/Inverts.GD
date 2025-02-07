@@ -8,19 +8,23 @@
 #' @param max_F Positive real number - the maximum instantaneous mortality rate in any historical time step
 #' @param comp_like The likelihood function used for composition data (age / length) c("multinomial", "lognormal", "mvlogistic", "dirmult1", "dirmult2") see ?RCM
 #' @param resample Logical - should parameters be drawn from the variance covariance matrix of the MLE fit (T) or just the MLE parameter values (F)
+#' @param parallel Logical - should model fitting use multiple cores
 #' @param silent Logical - should all RCM messages be repressed (ie not read out onto the console)?
 #' @examples
 #' cond.GD("In.GD.7")
 #' @author T. Carruthers
 #' @seealso \link{RCM}
 #' @export
-cond.GD = function(RCMinput, sims = 12, max_F = 0.22, comp_like = "lognormal", resample = T, silent=T){
-  setup()
+cond.GD = function(RCMinput, sims = 12, max_F = 0.22, comp_like = "lognormal", resample = T, parallel=T, silent=T){
+  if(parallel){
+    setup()
+    cores=parallel::detectCores()/2
+  }
   if(length(sims) == 1) simy = 1:sims
   if(length(sims) > 1) simy = sims
   OM = SubCpars(RCMinput$OM, simy)
   RCMfit = RCM(OM, RCMinput[[3]], s_selectivity=spec_sel(RCMinput),
-               max_F = max_F, mean_fit = T, condition = "catch", cores = parallel::detectCores(),
+               max_F = max_F, mean_fit = T, condition = "catch", cores = cores,
                comp_like=comp_like, priors = list(M = c(0.05,0.15)), LWT=list(IAA=1),
                drop_nonconv=T, drop_highF=T, resample = resample, silent=silent);
   RCMfit@OM@Name = paste0("Geoduck Stat Area ",RCMinput[[1]])
