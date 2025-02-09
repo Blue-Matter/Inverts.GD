@@ -33,7 +33,7 @@
 #' @author T. Carruthers
 #' @export
 MP.GD = function(x, Data, reps=1, Min.size = NaN, Max.size = NaN, CEff.Mult = NaN, C_I.targ = 1.0,
-                 I.targ = 0.5, IS.targ = 0, IS.yrs = 6, IS.fac = 1, TAC.calc = "Ratio", maxTAC = 5.0, minTAC = 0.1,
+                 I.targ = 0.5, IS.targ = 0, IS.yrs = 6, IS.fac = 1, TAC.calc = "Ratio", maxTAC = 100.0, minTAC = 0.01,
                  TACdec = 0.2, TACinc = 0.2, I.enp = 0.25, I_freq = "auto", rotation ="auto",calib_yrs = 3,
                  HCR_CP_B = c(0, 0), HCR_CP_TAC = c(0,1), curI_2_target = 2,
                  DR = 0, Fdisc = 0.5){
