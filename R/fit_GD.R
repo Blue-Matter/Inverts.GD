@@ -16,6 +16,7 @@
 #' @seealso \link{RCM}
 #' @export
 cond.GD = function(RCMinput, sims = 12, max_F = 0.22, comp_like = "lognormal", resample = T, parallel=F, silent=T){
+  cores=1
   if(parallel){
     setup()
     cores=parallel::detectCores()/2
